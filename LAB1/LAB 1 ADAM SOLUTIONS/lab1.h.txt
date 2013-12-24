@@ -1,0 +1,44 @@
+#include<iostream>
+#include<fstream>
+#include<sstream>
+#include<string>
+#include<locale>
+#include<map>
+
+// Read x NUM__Lines at a time, will be used later to deal with larger files
+#define READ_NUM_LINES 10
+
+using namespace std;
+
+// Our class to read in the file and convert it into the format we desire
+class FileReader {
+    string fileName; // File name we will open
+    ifstream input;  // Input stream to read contents of the file 
+    stringstream inputBuffer; // Using a string stream for an input buffer
+    string outputBuffer; // Output Buffer
+    int lines_read;     // Keeps track of the num lines read
+
+    public:
+        FileReader(string&);  // Constructor
+        int OpenFile();       // File open method
+        int CloseFile();      // Close file method  
+        int FillBuffer();     // Fill input buffer 
+        int ConvertBuffer();  // Covert input buffer to desired format
+        void PrintInBuffer(); // Diagnostic Function
+        void PrintOutBuffer(); // Diagnostic Function
+        int GetLinesRead();   // Return current num of lines read
+        string OutBuffer();   // Return the output buffer 
+};
+
+//  Class to count the words in a string separated by a space
+class WordCounts {
+    map<string, int> count; // STL map between string and a count
+    string buffer;          // string to be used as a buffer
+    public:
+        // Constructor input is a string of words seperated by a space
+        WordCounts(string); 
+        void DoWork();  // Count the words in the string
+        void PrintBuffer(); // Diagnostic function
+        void Insert(string input); // Insert into the map
+        void PrintMap(); // Print out the map
+};

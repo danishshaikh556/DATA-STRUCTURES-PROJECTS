@@ -1,0 +1,174 @@
+#include "lab1.h"
+
+// Constructor
+FileReader::FileReader(string& inputFileName){
+    fileName = inputFileName;
+    lines_read = 0;
+}
+
+// Return num of lines read
+int FileReader::GetLinesRead(){
+    return lines_read;    
+}
+// Open the file, returns 0 on success 1 on failure
+int FileReader::OpenFile(){
+    int ret=0;
+    // Open the user supplied file
+    input.open(fileName.c_str());
+    // File not opened correctly
+    if(!input.is_open()){
+        // Set ret to 1, be sure to check return values
+        ret = 1;
+    }
+
+    return ret;
+}
+
+// Close file returns 0 on success 1 on failure
+int FileReader::CloseFile(){
+    int ret=0;
+    // Close the file
+    input.close();
+    // Something weird occured and the file is still open
+    if(input.is_open()){
+        ret = 1;    
+    }
+
+    return ret;
+}
+
+// Returns 0 on success 1 on error 
+int FileReader::FillBuffer(){
+    
+    int ret = 0;  // Return value
+    string line;  // Temp string to hold one line
+    lines_read = 0; // Keep track of num of lines read
+    
+    // Loop over input file, until we hit the EOF or we've read 
+    // READ_NUM_LINES
+    while( input.good() && lines_read < READ_NUM_LINES ){
+        getline(input,line);
+        // I used a string stream for the input buffer, not necessary 
+        // can change this ot a string
+        inputBuffer << line << " "; // Place a space inbetween each line read 
+        lines_read++;  // Increment lines_read
+    } 
+
+    // We've hit the EOF
+    if(lines_read < READ_NUM_LINES){
+        ret = 1;
+    }
+
+    return ret;
+}          
+
+// Convert the input buffer into our desired format
+int FileReader::ConvertBuffer(){
+    
+    string convertMe; // Input buffer
+    string converted; // Output buffer
+    size_t pos;          // Position within a string
+
+    convertMe = inputBuffer.str(); // Convert out string stream to string
+
+    // Iterate over the input string
+    for(pos = 0; pos < convertMe.length(); pos++){
+    
+        char temp;  // Temp char
+        locale loc; // Used for tolower and is punc
+        temp = convertMe.at(pos); // Grab current character
+        
+        // Keep alphanumeric, space, and return char 
+        if( isalnum(temp, loc) || temp ==' ') {
+            converted.push_back(tolower(temp,loc));
+        }
+    } 
+    // cout << "Conversion finished " << endl; Diagnostics
+    // cout << "[ " << converted << " ]" << endl; 
+    inputBuffer.str(""); // Clear the inputBuffer
+    outputBuffer+=converted; // Place converted output into the out buffer
+
+    return 0;
+}
+               
+void FileReader::PrintInBuffer(){
+    cout << "[ " << inputBuffer.str() << " ]" << endl;
+    return;
+}
+
+void FileReader::PrintOutBuffer(){
+    return;
+}
+
+string FileReader::OutBuffer(){
+    return outputBuffer;
+}
+
+// Constructor for the WordCount class 
+WordCounts::WordCounts(string inputBuffer){
+    buffer = inputBuffer;
+}
+
+// Do work counts the words in the input buffer
+// Leverages the stl map
+void WordCounts::DoWork(){
+  
+  string temp;
+  size_t curSpace,count=0;
+
+  // Iterate over the input string
+  for(curSpace = 0; curSpace != string::npos;){
+    int prevSpace = curSpace;
+
+    // Skip over the space we found, only if we've found a space
+    // previously
+    if(count>0) prevSpace++;
+
+    // Locate the space
+    curSpace = buffer.find(' ', prevSpace);
+    // Get a temp string that is a word with spaces removed
+    temp = buffer.substr(prevSpace,curSpace-prevSpace);
+    // Skip over empty strings
+    if( temp.compare("")!=0 ) Insert(temp);
+    count++; // Count of words we've tried to insert
+  }
+}
+
+// Diagnostic function
+void WordCounts::PrintBuffer(){
+    cout << "[ "  << buffer << " ]" << endl;    
+}
+
+// Function that inserts key value pairs into the map
+void WordCounts::Insert(string input){
+    
+    // Pair to check output of the insert into the map
+    pair< map<string, int>::iterator, bool> ret; 
+        
+    // This will return false if input has been inserted into
+    // the map previously
+    ret = count.insert(pair<string,int> (input, 1));
+
+    // Handle the case that a value has been inserted
+    if(ret.second == false ){
+        // Diagnostics
+        //cout << "String: " << input << " has been inserted previously "; 
+        //cout << count[input] << " times" << endl;
+        
+        // Increment the int value of key input by 1
+        count[input]++;   
+    }
+}
+
+// Dianostic function to Print out the map 
+void WordCounts::PrintMap(){
+    
+    map<string, int>::iterator mapPos; // Print out all counts
+    
+    // Use an iterator to print out the values
+    for(mapPos = count.begin() ; mapPos != count.end(); mapPos++){
+        cout << mapPos->first << " ";
+        cout << mapPos->second << endl;
+    }
+
+}

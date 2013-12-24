@@ -1,0 +1,32 @@
+Visiting vertex: A Distance: 0
+Visiting vertex: B Distance: 1
+Visiting vertex: F Distance: 1
+Visiting vertex: H Distance: 1
+Visiting vertex: C Distance: 2
+Visiting vertex: D Distance: 2
+Visiting vertex: G Distance: 2
+Visiting vertex: E Distance: 3
+Visiting Vertex: A Time: 1
+Visiting Vertex: B Time: 2
+Visiting Vertex: C Time: 3
+Visiting Vertex: E Time: 4
+Visiting Vertex: D Time: 5
+Visiting Vertex: F Time: 6
+Visiting Vertex: G Time: 7
+Visiting Vertex: H Time: 8
+Finished Vertex: H Time: 9
+Finished Vertex: G Time: 10
+Finished Vertex: F Time: 11
+Finished Vertex: D Time: 12
+Finished Vertex: E Time: 13
+Finished Vertex: C Time: 14
+Finished Vertex: B Time: 15
+Finished Vertex: A Time: 16
+Vertex: A Key: 0
+Vertex: F Key: 3
+Vertex: D Key: 4
+Vertex: H Key: 4
+Vertex: G Key: 5
+Vertex: E Key: 9
+Vertex: B Key: 10
+Vertex: C Key: 10

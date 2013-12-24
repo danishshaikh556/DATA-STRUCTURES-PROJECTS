@@ -1,0 +1,40 @@
+Visiting vertex: binaries Distance: 0
+Visiting vertex: democracy Distance: 1
+Visiting vertex: gumption Distance: 1
+Visiting vertex: killdeer Distance: 1
+Visiting vertex: mints Distance: 1
+Visiting vertex: citrons Distance: 2
+Visiting vertex: gird Distance: 2
+Visiting vertex: emcees Distance: 2
+Visiting vertex: knotty Distance: 2
+Visiting vertex: chowders Distance: 2
+Visiting Vertex: binaries Time: 1
+Visiting Vertex: democracy Time: 2
+Visiting Vertex: citrons Time: 3
+Visiting Vertex: gird Time: 4
+Visiting Vertex: emcees Time: 5
+Visiting Vertex: gumption Time: 6
+Visiting Vertex: knotty Time: 7
+Visiting Vertex: chowders Time: 8
+Visiting Vertex: killdeer Time: 9
+Visiting Vertex: mints Time: 10
+Finished Vertex: mints Time: 11
+Finished Vertex: killdeer Time: 12
+Finished Vertex: chowders Time: 13
+Finished Vertex: knotty Time: 14
+Finished Vertex: gumption Time: 15
+Finished Vertex: emcees Time: 16
+Finished Vertex: gird Time: 17
+Finished Vertex: citrons Time: 18
+Finished Vertex: democracy Time: 19
+Finished Vertex: binaries Time: 20
+Vertex: binaries Key: 0
+Vertex: killdeer Key: 6
+Vertex: emcees Key: 7
+Vertex: chowders Key: 12
+Vertex: knotty Key: 1
+Vertex: mints Key: 11
+Vertex: gird Key: 17
+Vertex: citrons Key: 13
+Vertex: gumption Key: 18
+Vertex: democracy Key: 19

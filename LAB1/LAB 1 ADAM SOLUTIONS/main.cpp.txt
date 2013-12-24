@@ -1,0 +1,48 @@
+// Main.cpp for lab assignment 1 for CSCI 311, Data Structures and Algorithms
+// in C++. Written by Adam Manzanares - amanzanares@csuchico.edu 
+
+
+#include "lab1.h"
+
+int main(int argc, char** argv){
+   
+    string inputFile; 
+    
+    if( argc != 2 ) {
+        cout << " Program requires one argument \"filename\"" << endl;
+        return 0;
+    }
+
+    inputFile+=argv[1];
+
+    FileReader myFileReader(inputFile); // create a file reader
+    
+    if(myFileReader.OpenFile() == 1){ // Check open call
+        cout << "Error occured opening file" << endl; // Open failed
+        cout << "Bailing out " << endl;
+        return 0;
+    }
+
+    while(!myFileReader.FillBuffer()){ // Fill our buffer with NUM_LINES
+        //myFileReader.PrintInBuffer();  // Print the buffer
+        myFileReader.ConvertBuffer();  // Convert the buffer
+    }
+   
+    if( myFileReader.GetLinesRead() != READ_NUM_LINES) // Any final data  
+    { 
+        // I should only do this if there wasn't an error
+        //myFileReader.PrintInBuffer(); 
+        myFileReader.ConvertBuffer();
+    }
+    
+    // Pass converted buffer (no punctuation or capitol letters) to word counter
+    WordCounts myWordCounts(myFileReader.OutBuffer()); 
+    // myWordCounts.PrintBuffer(); Uncomment for a check of word count buffer                 
+    myWordCounts.DoWork();  // Place words into an STL map
+    myWordCounts.PrintMap(); // Print out the results
+
+    // Close the file 
+    myFileReader.CloseFile();
+
+    return 0;    
+}
