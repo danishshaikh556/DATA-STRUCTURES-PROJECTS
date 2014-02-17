@@ -224,6 +224,7 @@ if ((l<heapsize) && (Q[l].first<=Q[i].first))		//comparing parent with left chil
 	int t=smallest;
     
 	if ((r<heapsize) && (Q[r].first<=Q[smallest].first)) 
+	{
 			if(Q[r].first==Q[smallest].first)      
 			{
 				if(Q[r].second->name<Q[smallest].second->name)
@@ -233,6 +234,7 @@ if ((l<heapsize) && (Q[l].first<=Q[i].first))		//comparing parent with left chil
 			}
 			else
 				smallest=r;
+	}
 
 	if (smallest!=i)							
     {
